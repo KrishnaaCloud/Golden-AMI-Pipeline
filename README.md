@@ -4,7 +4,7 @@ This project contains the architectural overview and deployment automation for a
 
 The goal of this pipeline is to enforce strict organizational security, standardize operating environments, and optimize EC2 autoscaling boot times across **9 separate AWS consumer accounts**.
 
-## 🛠️ Tools & Infrastructure
+## Tools & Infrastructure
 * **AWS EC2 Image Builder:** Bakes AMIs with organizational dependencies (Elastic Agent, EFS utils, AWS CLI).
 * **AWS Systems Manager (SSM) Parameter Store:** Distributes the resulting AMI IDs globally to consumer accounts.
 * **AWS Lambda & EventBridge:** Post-build automation for cross-account AMI sharing and tagging.
@@ -12,7 +12,7 @@ The goal of this pipeline is to enforce strict organizational security, standard
 * **Elastic Agent / Fleet:** Centralized host monitoring and logging for all instances.
 * **Python (boto3) & Bash:** Ad-hoc cross-account IAM management and stale resource cleanup.
 
-## 🚀 Key Workflows & Engineering Challenges
+## Key Workflows & Engineering Challenges
 
 ### 1. Global SSM Parameter Standardization
 To streamline consumption across 9 different DevOps and Application teams, legacy SSM parameters were standardized to a global naming convention. Downstream AWS CDK stacks dynamically resolve these paths to ensure Autoscaling Groups always launch with the latest compliant image.
@@ -44,7 +44,7 @@ sudo /opt/Elastic/Agent/elastic-agent enroll \
 sudo systemctl enable --now elastic-agent.service
 ```
 
-## 📊 Final Metrics & Business Impact
+## Final Metrics & Business Impact
 By resolving the `cloud-init` bottlenecks, we accurately measured the ASG scale-out sequence using a custom Python daemon:
 
 * **T0 (Pending):** 0 seconds
